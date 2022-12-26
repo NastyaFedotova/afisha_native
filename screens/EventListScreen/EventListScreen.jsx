@@ -25,7 +25,7 @@ export const EventListScreen = ({ navigation }) => {
       <View style={styles.container}>
         {eventList?.map((event) => (
           <EventCard key={event.id} navigation={navigation} {...event} />
-        )) ?? <Text>ждем</Text>}
+        ))}
       </View>
     </ScrollView>
   );
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#e0e5ff",
+    backgroundColor: "#F16D95",
     padding: 12,
     minHeight: Dimensions.get("window").height,
   },

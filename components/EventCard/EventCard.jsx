@@ -5,6 +5,7 @@ import { setEvent } from "../../store/eventSlice";
 
 export const EventCard = ({ navigation, ...event }) => {
   const dispatch = useDispatch();
+  
   const handlePress = useCallback(() => {
     navigation.navigate("Event");
     dispatch(setEvent(event));
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   price: {
-    backgroundColor: "royalblue",
+    backgroundColor: "#E40045",
     alignSelf: "flex-start",
     fontSize: 16,
     fontWeight: "600",

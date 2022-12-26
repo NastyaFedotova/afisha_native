@@ -11,15 +11,6 @@ import { useSelector } from "react-redux";
 
 export const EventScreen = () => {
   const { event } = useSelector((state) => state.event);
-  const ratingStars = useMemo(() => {
-    [...Array(event.rating < 0 ? 0 : event.rating)].map((value, index) => (
-      <Image
-        key={index}
-        source={require("../../assets/star.png")}
-        style={styles.starGrey}
-      />
-    ));
-  }, [event]);
 
   return (
     <ScrollView>
@@ -27,7 +18,6 @@ export const EventScreen = () => {
         <View style={styles.container}>
           <Text style={styles.title}>{event.title}</Text>
           <Text style={styles.price}>{event.price} Р.</Text>
-          <View style={styles.starContainer}>{ratingStars}</View>
         </View>
       </View>
     </ScrollView>
@@ -38,7 +28,7 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#e0e5ff",
+    backgroundColor: "#F16D95",
     padding: 12,
     minHeight: Dimensions.get("window").height,
   },
@@ -63,7 +53,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   price: {
-    backgroundColor: "royalblue",
+    backgroundColor: "#E40045",
     alignSelf: "flex-start",
     fontSize: 18,
     fontWeight: "600",

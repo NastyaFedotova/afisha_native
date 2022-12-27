@@ -6,11 +6,31 @@ import {
   Dimensions,
   ScrollView,
 } from "react-native";
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { axiosInstance } from "../../axios";
 
 export const EventScreen = () => {
+  const dispatch = useDispatch();
+  const [count, onChangeCount] = React.useState(0);
+
   const { event } = useSelector((state) => state.event);
+
+  const handlePress = useCallback(() => {
+    async function createTicket() {
+      await axiosInstance
+        .post("/tickets/", {
+          user: 2,
+          event: Number(event?.id),
+          booking_date: new Date(),
+          status: "BOOKED",
+          count: Number(count),
+        })
+        .then((response) => dispatch(removeEvent(response?.data)));
+    }
+    createTicket();
+    navigation.navigate("EventList");
+  }, [navigation, count, event?.id]);
 
   return (
     <ScrollView>
@@ -18,6 +38,20 @@ export const EventScreen = () => {
         <View style={styles.container}>
           <Text style={styles.title}>{event.title}</Text>
           <Text style={styles.price}>{event.price} Р.</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(value) => onChangeCount(value)}
+            value={count}
+            keyboardType="number-pad"
+          />
+          <View style={styles.buttonView}>
+            <Pressable
+              title=""
+              onPress={handlePress}
+              style={styles.addToBasket}
+            />
+            <Text>Оформить</Text>
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -76,5 +110,26 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     opacity: 0.6,
+  },
+  input: {
+    height: 40,
+    borderWidth: 1,
+    backgroundColor: "#ffffff",
+    width: 100,
+  },
+  buttonView: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#e0e5ff",
+    padding: 12,
+  },
+  addToBasket: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: "transparent",
+    zIndex: 1,
   },
 });

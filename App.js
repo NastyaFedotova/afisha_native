@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Alert } from "react-native";
 import { Provider } from "react-redux";
+import { BasketScreen } from "./screens/BasketScreen";
 import { EventListScreen } from "./screens/EventListScreen";
 import { EventScreen } from "./screens/EventScreen";
 import { store } from "./store";
@@ -15,6 +16,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="EventList" component={EventListScreen} />
           <Stack.Screen name="Event" component={EventScreen} />
+          <Stack.Screen name="Basket" component={BasketScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

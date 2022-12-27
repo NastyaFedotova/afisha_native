@@ -15,9 +15,15 @@ export const eventSlice = createSlice({
     setEvent: (state, { payload }) => {
       state.event = payload;
     },
+    removeEvent: (state, { payload }) => {
+      state.eventList =
+        state.eventList?.filter(
+          (event) => event?.id !== payload?.service
+        ) ?? [];
+    }
   },
 });
 
 export const eventReducer = eventSlice.reducer;
 
-export const { setEventList, setEvent } = eventSlice.actions;
+export const { setEventList, setEvent, removeEvent } = eventSlice.actions;

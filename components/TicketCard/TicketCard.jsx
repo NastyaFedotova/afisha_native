@@ -37,14 +37,14 @@ export const TicketCard = ({ ...ticket }) => {
 
   return (
     <View style={styles.container_cnt}>
-      <Text style={styles.title}>{`ID клиента - ${ticket?.client}`}</Text>
+      <Text style={styles.title}>{`ID клиента - ${ticket?.user}`}</Text>
       <Text
         style={styles.title}
       >{`Кол-во билетов - ${ticket?.count} шт`}</Text>
       <Text style={styles.status}>{`Статус - ${ticket?.status}`}</Text>
       <View style={styles.sign}>
         <Pressable text="" onPress={handlePressBought} style={styles.button} />
-        <Text style={styles.text}>Подписать</Text>
+        <Text style={styles.text}>Купить</Text>
       </View>
       <View style={styles.delete}>
         <Pressable text="" onPress={handlePressDelete} style={styles.button} />

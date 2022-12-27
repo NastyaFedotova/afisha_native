@@ -4,13 +4,16 @@ import {
   Image,
   StyleSheet,
   Dimensions,
+  TextInput,
   ScrollView,
+  Pressable,
 } from "react-native";
 import React, { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosInstance } from "../../axios";
+import { removeEvent } from "../../store/eventSlice";
 
-export const EventScreen = () => {
+export const EventScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const [count, onChangeCount] = React.useState(0);
 
@@ -18,15 +21,13 @@ export const EventScreen = () => {
 
   const handlePress = useCallback(() => {
     async function createTicket() {
-      await axiosInstance
-        .post("/tickets/", {
-          user: 2,
-          event: Number(event?.id),
-          booking_date: new Date(),
-          status: "BOOKED",
-          count: Number(count),
-        })
-        .then((response) => dispatch(removeEvent(response?.data)));
+      await axiosInstance.post("/tickets/", {
+        user: 2,
+        event: Number(event?.id),
+        booking_date: new Date(),
+        status: "BOOKED",
+        count: Number(count),
+      });
     }
     createTicket();
     navigation.navigate("EventList");
